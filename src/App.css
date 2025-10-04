@@ -1,38 +1,446 @@
-.App {
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  max-width: 320px;
+  max-height: 667px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Arial', sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.container::before {
+  content: '';
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+  background-size: 30px 30px;
+  animation: moveBackground 20s linear infinite;
+}
+
+@keyframes moveBackground {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(30px, 30px); }
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding: 20px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Title Screen */
+.title-screen {
+  animation: fadeInScale 1s ease-out;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.main-title {
+  font-size: 48px;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+  margin-bottom: 15px;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.subtitle {
+  font-size: 24px;
+  color: #ffd700;
+  font-weight: 600;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Animation Content */
+.animation-content {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Problem Intro */
+.problem-intro {
+  animation: slideInDown 0.8s ease-out;
+}
+
+.equation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  font-size: 56px;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.number.large {
+  animation: popIn 0.5s ease-out;
+}
+
+.operator {
+  font-size: 48px;
+  color: #ffd700;
+}
+
+.question {
+  color: #ffd700;
+  animation: blink 1s ease-in-out infinite;
+}
+
+@keyframes slideInDown {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0.3; }
+}
+
+/* Breakdown */
+.breakdown {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 30px;
+}
+
+.original-number {
+  display: flex;
+  gap: 30px;
+  font-size: 80px;
+  font-weight: bold;
+}
+
+.digit {
+  color: #fff;
+  text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+  transition: all 0.5s ease;
+}
+
+.digit.highlight-blue {
+  color: #4fc3f7;
+  transform: scale(1.3);
+  animation: glowBlue 1s ease-in-out infinite;
+}
+
+.digit.highlight-green {
+  color: #81c784;
+  transform: scale(1.3);
+  animation: glowGreen 1s ease-in-out infinite;
+}
+
+@keyframes glowBlue {
+  0%, 100% {
+    text-shadow: 0 0 10px #4fc3f7, 0 0 20px #4fc3f7, 0 0 30px #4fc3f7;
+  }
+  50% {
+    text-shadow: 0 0 20px #4fc3f7, 0 0 30px #4fc3f7, 0 0 40px #4fc3f7;
+  }
+}
+
+@keyframes glowGreen {
+  0%, 100% {
+    text-shadow: 0 0 10px #81c784, 0 0 20px #81c784, 0 0 30px #81c784;
+  }
+  50% {
+    text-shadow: 0 0 20px #81c784, 0 0 30px #81c784, 0 0 40px #81c784;
+  }
+}
+
+/* Addition Step */
+.addition-step {
+  animation: slideInUp 0.6s ease-out;
+}
+
+.add-animation {
+  display: flex;
+  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 15px;
+  font-size: 48px;
+  font-weight: bold;
+  color: #fff;
+  background: rgba(255,255,255,0.15);
+  padding: 20px 30px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
 }
 
-.App-link {
-  color: #61dafb;
+.add-num {
+  animation: popIn 0.4s ease-out;
 }
 
-@keyframes App-logo-spin {
+.plus, .equals {
+  color: #ffd700;
+  font-size: 40px;
+}
+
+.sum-result {
+  color: #ff6b6b;
+  animation: tada 0.8s ease-out;
+  font-size: 56px;
+}
+
+@keyframes slideInUp {
   from {
-    transform: rotate(0deg);
+    transform: translateY(50px);
+    opacity: 0;
   }
   to {
-    transform: rotate(360deg);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes tada {
+  0% {
+    transform: scale(0.5) rotate(0deg);
+  }
+  10%, 20% {
+    transform: scale(1.2) rotate(-5deg);
+  }
+  30%, 50%, 70%, 90% {
+    transform: scale(1.2) rotate(5deg);
+  }
+  40%, 60%, 80% {
+    transform: scale(1.2) rotate(-5deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* Placement Animation */
+.placement-animation {
+  animation: fadeIn 0.5s ease-in;
+}
+
+.instruction {
+  font-size: 28px;
+  color: #ffd700;
+  font-weight: bold;
+  margin-bottom: 30px;
+  animation: bounce 1s ease-in-out infinite;
+}
+
+.building-answer {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.digit-slot {
+  width: 70px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 56px;
+  font-weight: bold;
+  color: #fff;
+  background: rgba(255,255,255,0.2);
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  animation: slideInSlot 0.5s ease-out;
+}
+
+.middle-slot {
+  background: linear-gradient(135deg, #ff6b6b, #ffd700);
+  animation: slideInMiddle 0.8s ease-out, wiggle 0.6s ease-in-out;
+  transform-origin: center;
+}
+
+@keyframes slideInSlot {
+  from {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInMiddle {
+  from {
+    transform: translateY(-80px) scale(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-10deg); }
+  75% { transform: rotate(10deg); }
+}
+
+/* Final Answer */
+.final-answer {
+  animation: zoomIn 0.8s ease-out;
+}
+
+.result-equation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.small-eq {
+  font-size: 32px;
+  color: #fff;
+  font-weight: 600;
+}
+
+.answer-large {
+  font-size: 100px;
+  font-weight: bold;
+  color: #ffd700;
+  text-shadow: 4px 4px 8px rgba(0,0,0,0.4);
+  animation: scaleUp 1s ease-out;
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes scaleUp {
+  0% {
+    transform: scale(0.5);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Celebrate */
+.celebrate {
+  margin-top: 30px;
+  animation: fadeIn 0.5s ease-in;
+}
+
+.emoji-burst {
+  font-size: 48px;
+  animation: burst 1s ease-out;
+  margin-bottom: 15px;
+}
+
+.try-text {
+  font-size: 28px;
+  color: #fff;
+  font-weight: bold;
+  animation: bounce 1.5s ease-in-out infinite;
+}
+
+@keyframes burst {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Responsive for smaller screens */
+@media (max-width: 320px) {
+  .main-title {
+    font-size: 40px;
+  }
+  
+  .equation {
+    font-size: 48px;
+    gap: 10px;
+  }
+  
+  .original-number {
+    font-size: 70px;
+    gap: 20px;
+  }
+  
+  .answer-large {
+    font-size: 80px;
   }
 }

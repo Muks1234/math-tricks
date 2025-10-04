@@ -13,8 +13,6 @@ body, html {
 .container {
   width: 100vw;
   height: 100vh;
-  max-width: 320px;
-  max-height: 667px;
   margin: 0 auto;
   background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e8ba3 100%);
   display: flex;
@@ -45,8 +43,9 @@ body, html {
   position: relative;
   z-index: 1;
   width: 100%;
-  padding: 20px;
+  padding: 15px;
   text-align: center;
+  transform: translateY(-30px);
 }
 
 /* Title Screen */
@@ -481,5 +480,92 @@ body, html {
   font-size: 100px;
   font-weight: 800;
   color: #ffd966;
-  text-shadow: 4px;
+  text-shadow: 4px 4px 10px rgba(0,0,0,0.5);
+  animation: scaleUp 1s ease-out;
+}
+
+.checkmark {
+  font-size: 56px;
+  color: #4caf50;
+  animation: checkPop 0.6s ease-out;
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes scaleUp {
+  0% {
+    transform: scale(0.5);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes checkPop {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* CTA */
+.cta {
+  background: rgba(255,255,255,0.95);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  animation: slideInUp 0.6s ease-out;
+}
+
+.cta-text {
+  font-size: 24px;
+  color: #1e3c72;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.cta-follow {
+  font-size: 18px;
+  color: #2a5298;
+  font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 320px) {
+  .main-title {
+    font-size: 46px;
+  }
+  
+  .equation {
+    font-size: 50px;
+    gap: 10px;
+  }
+  
+  .original-number {
+    font-size: 70px;
+    gap: 30px;
+  }
+  
+  .answer-large {
+    font-size: 85px;
+  }
 }
